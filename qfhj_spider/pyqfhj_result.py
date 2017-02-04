@@ -28,7 +28,6 @@ headers = {
 }
 
 postData = '{"username":"用户名","password":"密码"}'
-#postData = '{"username":"shuang.zhou","password":"zhoushuang123"}'
 
 print('开始登录钱包后台。。。\n')
 s.post(host + 'yfpay_admin/user/login', data = postData, headers = headers)
@@ -74,10 +73,7 @@ captchakey = getCaptchakey(r.text)
 
 #获取验证码
 r = s.get(basicUrl + 'captcha/image/' + captchakey + '/')
-with open('code.png','wb') as f:
-	f.write(r.content)
-
-i = Image.open('code.png')
+i = Image.open(BytesIO(r.content))
 i.show()
 
 print('\n开始登录钱方好近。。。')
@@ -215,7 +211,6 @@ print('===== d:/qfhj/importChange' + xlstime + '.xls 生成成功 =====\n')
 
 #登录钱包后台，导入exl
 postData = '{"username":"用户名","password":"密码"}'
-#postData = '{"username":"shuang.zhou","password":"zhoushuang123"}'
 
 print('再次登录钱包后台。。。\n')
 s.post(host + 'yfpay_admin/user/login', data = postData, headers = headers)

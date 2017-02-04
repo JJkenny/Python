@@ -221,10 +221,12 @@ captchakey = getCaptchakey(r.text)
 
 #获取验证码
 r = s.get(basicUrl + 'captcha/image/' + captchakey + '/')
-with open('code.png','wb') as f:
-	f.write(r.content)
+# with open('code.png','wb') as f:
+# 	f.write(r.content)
 
-i = Image.open('code.png')
+# i = Image.open('code.png')
+# i.show()
+i = Image.open(BytesIO(r.content))
 i.show()
 
 captcha = input('\n请输入验证码：')
