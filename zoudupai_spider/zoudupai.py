@@ -53,7 +53,7 @@ while hasNextPage == 1:
 		urlText = soup.div.find_all(downloadUrl)[0]['onclick']
 		if len(urlCer.findall(urlText))>0:
 			url = urlCer.findall(urlText)[0]
-			titleText = soup.title.string.replace('*','X')
+			titleText = soup.title.string
 			titleCer = re.compile('.*?《(.*?)》', flags = 0)
 			if len(titleCer.findall(titleText)):
 				title = titleCer.findall(titleText)[0].strip()
@@ -63,5 +63,5 @@ while hasNextPage == 1:
 
 for k,v in dict.items():
 	r = s.post(base_url + v)
-	with open(k + '.mobi', 'wb') as f:
+	with open(k.replace('*','X').replace(':','：') + '.mobi', 'wb') as f:
 		f.write(r.content)
